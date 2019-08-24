@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
+body{
+  background: #f0d3ad;
+  height: 100vh;
+  color: #343a40;
+}
+
+.form_wrapper{
+  background: #343a40;
+  padding: 45px 0;
+}
+
+.input-group-text {
+  border-radius: unset;
+}
+
+.form-control{
+  border-radius: unset;
+}
+
+.form-control:focus{
+  box-shadow: unset
+}
+
+.jsgrid-filter-row>.jsgrid-cell{
+	background: #6c757d;
+}
+
+.jsgrid-header-row>.jsgrid-header-cell {
+  background: #343a40;
+  color: #fff;
+}

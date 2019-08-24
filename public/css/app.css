@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
+.form_wrapper{
+  background: #000;
+  padding: 45px 0;
+}
+
+.input-group-text {
+  border-radius: unset;
+}
+
+.form-control{
+  border-radius: unset;
+}
