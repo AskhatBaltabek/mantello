@@ -76,11 +76,16 @@
   <!-- style CSS
   ============================================ -->          
   <link rel="stylesheet" href="{{asset('plugins/lavoro/style.css')}}">
+  <link rel="stylesheet" href="{{asset('plugins/assets/plugins/toast-master/css/jquery.toast.css')}}">
   
   <!-- responsive CSS
   ============================================ -->          
   <link rel="stylesheet" href="{{asset('plugins/lavoro/css/responsive.css')}}">
   
+  <link rel="stylesheet" href="{{asset('css/shop.css')}}">
+
+  @yield('styles')
+
   <script src="{{asset('plugins/lavoro/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
 <body class="home-one">
@@ -93,7 +98,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- logo start -->
-        <div class="col-md-3 col-sm-12 text-center nopadding-right">
+        <div class="col-md-3 col-sm-12 text-center nopadding-right" style="z-index:99">
           <div class="top-logo">
             <a href="/"><img src="{{asset('plugins/lavoro/img/mantello_logo/LOGO__5BMANTELLO_5D_3.gif')}}" alt="" /></a>
           </div>
@@ -106,13 +111,14 @@
               <ul>
                 <li><a href="/">Home</a></li>
                 @foreach($categories as $category)
-                <li class="expand"><a href="shop-grid?c={{$category->id}}">{{$category->title}}</a>
+                <li class="{{count($category->children) ? 'expand' : ''}}">
+                  <a href="{{route('Shop.Grid')}}?c={{$category->id}}">{{$category->title}}</a>
                   <div class="restrain mega-menu megamenu1">
                     @foreach($category->children as $subCategory)
                     <span>
-                      <a class="mega-menu-title" href="shop-grid?c={{$subCategory->id}}">{{$subCategory->title}}</a>
+                      <a class="mega-menu-title" href="{{route('Shop.Grid')}}?c={{$subCategory->id}}">{{$subCategory->title}}</a>
                       @foreach($subCategory->children as $child)
-                      <a href="shop-grid?c={{$child->id}}">{{$child->title}}</a>
+                      <a href="{{route('Shop.Grid')}}?c={{$child->id}}">{{$child->title}}</a>
                       @endforeach
                     </span>
                     @endforeach
@@ -122,8 +128,8 @@
                   </div>
                 </li>
                 @endforeach
-                <li class="expand"><a href="about">About</a></li>
-                <li class="expand"><a href="contact">Contact</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="contact">Contact</a></li>
               </ul>
             </nav>
           </div>
@@ -134,121 +140,26 @@
                 <span class="mobile-menu-title">Menu</span>
                 <nav>
                   <ul>
-                    <li><a href="index.html">Home</a>
+                    <li><a href="/">Home</a></li>
+                    @foreach($categories as $category)
+                    <li>
+                      <a href="{{route('Shop.Grid')}}?c={{$category->id}}">{{$category->title}}</a>
                       <ul>
-                        <li><a href="index-2.html">Home 2</a></li>
-                        <li><a href="index-3.html">Home 3</a></li>
-                        <li><a href="index-4.html">Home 4</a></li>
-                        <li><a href="index-5.html">Home 5</a></li>
-                        <li><a href="index-6.html">Home 6</a></li>
-                        <li><a href="index-7.html">Home 7</a></li>
-                        <li><a href="index-8.html">Home 8</a></li>
+                        @foreach($category->children as $subCategory)
+                        <li>
+                          <a href="{{route('Shop.Grid')}}?c={{$subCategory->id}}">{{$subCategory->title}}</a>
+                          <ul>
+                            @foreach($subCategory->children as $child)
+                            <li><a href="{{route('Shop.Grid')}}?c={{$child->id}}">{{$child->title}}</a></li>
+                            @endforeach
+                          </ul>
+                        </li>
+                        @endforeach
                       </ul>
                     </li>
-                    <li><a href="shop-grid.html">Man</a>
-                      <ul>
-                        <li><a href="shop-grid.html">Dresses</a>
-                          <ul>
-                            <li><a href="shop-grid.html">Coctail</a></li>
-                            <li><a href="shop-grid.html">Day</a></li>
-                            <li><a href="shop-grid.html">Evening </a></li>
-                            <li><a href="shop-grid.html">Sports</a></li>
-                          </ul>
-                        </li>
-                        <li><a class="mega-menu-title" href="shop-grid.html"> Handbags </a>
-                          <ul>
-                            <li><a href="shop-grid.html">Blazers</a></li>
-                            <li><a href="shop-grid.html">Table</a></li>
-                            <li><a href="shop-grid.html">Coats</a></li>
-                            <li><a href="shop-grid.html">Kids</a></li>
-                          </ul>
-                        </li>
-                        <li><a class="mega-menu-title" href="shop-grid.html"> Clothing </a>
-                          <ul>
-                            <li><a href="shop-grid.html">T-Shirt</a></li>
-                            <li><a href="shop-grid.html">Coats</a></li>
-                            <li><a href="shop-grid.html">Jackets</a></li>
-                            <li><a href="shop-grid.html">Jeans</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="shop-list.html">Women</a>
-                      <ul>
-                        <li><a href="shop-grid.html">Rings</a>
-                          <ul>
-                            <li><a href="shop-grid.html">Coats & Jackets</a></li>
-                            <li><a href="shop-grid.html">Blazers</a></li>
-                            <li><a href="shop-grid.html">Jackets</a></li>
-                            <li><a href="shop-grid.html">Rincoats</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="shop-grid.html">Dresses</a>
-                          <ul>
-                            <li><a href="shop-grid.html">Ankle Boots</a></li>
-                            <li><a href="shop-grid.html">Footwear</a></li>
-                            <li><a href="shop-grid.html">Clog Sandals</a></li>
-                            <li><a href="shop-grid.html">Combat Boots</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="shop-grid.html">Accessories</a>
-                          <ul>
-                            <li><a href="shop-grid.html">Bootees bags</a></li>
-                            <li><a href="shop-grid.html">Blazers</a></li>
-                            <li><a href="shop-grid.html">Jackets</a></li>
-                            <li><a href="shop-grid.html">Jackets</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="shop-grid.html">Top</a>
-                          <ul>
-                            <li><a href="shop-grid.html">Briefs</a></li>
-                            <li><a href="shop-grid.html">Camis</a></li>
-                            <li><a href="shop-grid.html">Nigntwears</a></li>
-                            <li><a href="shop-grid.html">Shapewears</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="shop-grid.html">Shop</a>
-                      <ul>
-                        <li><a href="shop-list.html">Shop Pages</a>
-                          <ul>
-                            <li><a href="shop-list.html">List View </a></li>
-                            <li><a href="shop-grid.html">Grid View</a></li>
-                            <li><a href="login.html">My Account</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="cart.html">Cart </a></li>
-                            <li><a href="checkout.html">Checkout </a></li>
-                          </ul>
-                        </li>
-                        <li><a href="product-details.html">Product Types</a>
-                          <ul>
-                            <li><a href="product-details.html">Simple Product</a></li>
-                            <li><a href="product-details.html">Variables Product</a></li>
-                            <li><a href="product-details.html">Grouped Product</a></li>
-                            <li><a href="product-details.html">Downloadable</a></li>
-                            <li><a href="product-details.html">Virtual Product</a></li>
-                            <li><a href="product-details.html">External Product</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                      <ul>
-                        <li><a href="shop-grid.html">Shop Grid</a></li>
-                        <li><a href="shop-list.html">Shop List</a></li>
-                        <li><a href="product-details.html">Product Details</a></li>
-                        <li><a href="contact-us.html">Contact Us</a></li>
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="cart.html">Shopping cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="wishlist.html">Wishlist</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="404.html">404 Error</a></li>
-                      </ul>                         
-                    </li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li>
+                    @endforeach
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="contact">Contact Us</a></li>
                   </ul>
                 </nav>
               </div>            
@@ -263,65 +174,30 @@
             <!-- language division start -->
             <div class="disflow">
               <div class="expand lang-all disflow">
-                <a href="#"><img src="{{asset('plugins/lavoro/img/country/en.gif')}}" alt="">English</a>
+                <a href="/"><img src="{{asset('plugins/lavoro/img/country/en.gif')}}" alt="">English</a>
                 <ul class="restrain language">
-                  <li><a href="#"><img src="{{asset('plugins/lavoro/img/country/de_de.gif')}}" alt="">Russian</a></li>
-                  <li><a href="#"><img src="{{asset('plugins/lavoro/img/country/en.gif')}}" alt="">English</a></li>
+                  <li><a href="/"><img src="{{asset('plugins/lavoro/img/country/de_de.gif')}}" alt="">Русский</a></li>
+                  <li><a href="/"><img src="{{asset('plugins/lavoro/img/country/en.gif')}}" alt="">English</a></li>
                 </ul>
               </div>
-              <div class="expand lang-all disflow">
+              {{-- <div class="expand lang-all disflow">
                 <a href="#">$ USD</a>
                 <ul class="restrain language">
                   <li><a href="#">€ Eur</a></li>
                   <li><a href="#">$ USD</a></li>
                   <li><a href="#">£ GBP</a></li>
                 </ul>
-              </div>
+              </div> --}}
             </div>
             <!-- language division end -->
             <!-- addcart top start -->
             <div class="disflow">
               <div class="circle-shopping expand">
-                <div class="shopping-carts text-right">
-                  <div class="cart-toggler">
-                    <a href="#"><i class="icon-bag"></i></a>
-                    <a href="#"><span class="cart-quantity">2</span></a>
-                  </div>
-                  <div class="restrain small-cart-content">
-                    <ul class="cart-list">
-                      <li>
-                        <a class="sm-cart-product" href="product-details.html">
-                          <img src="{{asset('plugins/lavoro/img/products/sm-products/cart1.jpg')}}" alt="">
-                        </a>
-                        <div class="small-cart-detail">
-                          <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                          <a href="#" class="edit-btn"><img src="{{asset('plugins/lavoro/img/btn_edit.gif')}}" alt="Edit Button" /></a>
-                          <a class="small-cart-name" href="product-details.html">Voluptas nulla</a>
-                          <span class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
-                        </div>
-                      </li>
-                      <li>
-                        <a class="sm-cart-product" href="product-details.html">
-                          <img src="{{asset('plugins/lavoro/img/products/sm-products/cart2.jpg')}}" alt="">
-                        </a>
-                        <div class="small-cart-detail">
-                          <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                          <a href="#" class="edit-btn"><img src="{{asset('plugins/lavoro/img/btn_edit.gif')}}" alt="Edit Button" /></a>
-                          <a class="small-cart-name" href="product-details.html">Donec ac tempus</a>
-                          <span class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
-                        </div>
-                      </li>
-                    </ul>
-                    <p class="total">Subtotal: <span class="amount">$155.00</span></p>
-                    <p class="buttons">
-                      <a href="checkout.html" class="button">Checkout</a>
-                    </p>
-                  </div>
-                </div>
+                
               </div>
             </div>
             <!-- addcart top start -->
-            <!-- search divition start -->
+            {{-- <!-- search divition start -->
             <div class="disflow">
               <div class="header-search expand">
                 <div class="search-icon fa fa-search"></div>
@@ -339,7 +215,7 @@
                 </div>
               </div>
             </div>
-            <!-- search divition end -->
+            <!-- search divition end --> --}}
             <div class="disflow">
               <div class="expand dropps-menu">
                 <a href="#"><i class="fa fa-align-right"></i></a>
@@ -445,7 +321,7 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
     <!-- top footer area end -->
     <!-- info footer start -->
     <div class="info-footer">
@@ -504,7 +380,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-xs-12">
-            <address>Copyright © <a href="http://bootexperts.com/">BootExperts.</a> All Rights Reserved</address>
+            <address>{{date('Y')}} <a href="/">Mantello.</a> All Rights Reserved</address>
           </div>
           <div class="col-md-6 col-xs-12">
             <div class="footer-payment pull-right">
@@ -564,9 +440,16 @@
   <!-- plugins js
   ============================================ -->         
   <script src="{{asset('plugins/lavoro/js/plugins.js')}}"></script>
+
+  <script src="{{asset('plugins/assets/plugins/toast-master/js/jquery.toast.js')}}"></script>
   
   <!-- main js
   ============================================ -->           
   <script src="{{asset('plugins/lavoro/js/main.js')}}"></script>
+
+  <script src="{{asset('js/shop.js')}}"></script>
+
+  @yield('scripts')
+
 </body>
 </html>

@@ -32,7 +32,7 @@
       <div class="col-md-5 col-sm-5 col-xs-12">
         <div class="zoomWrapper">
           <div id="img-1" class="zoomWrapper single-zoom">
-            <a href="#">
+            <a>
               <img id="zoom1" src="{{asset(preg_replace('/public/', 'storage', $product->getPrimaryImage()))}}" data-zoom-image="{{asset(preg_replace('/public/', 'storage', $product->getPrimaryImage()))}}" alt="big-1">
             </a>
           </div>
@@ -40,7 +40,7 @@
             <ul class="bxslider" id="gallery_01">
               @foreach($product->getGalleryImages() as $image)
               <li>
-                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="{{asset(preg_replace('/public/', 'storage', $image))}}" data-zoom-image="{{asset(preg_replace('/public/', 'storage', $image))}}"><img src="{{asset(preg_replace('/public/', 'storage', $image))}}" alt="zo-th-1" /></a>
+                <a class="elevatezoom-gallery" data-update="" data-image="{{asset(preg_replace('/public/', 'storage', $image))}}" data-zoom-image="{{asset(preg_replace('/public/', 'storage', $image))}}"><img src="{{asset(preg_replace('/public/', 'storage', $image))}}" alt="zo-th-1" /></a>
               </li>
               @endforeach
             </ul>
@@ -61,7 +61,7 @@
                   <a href="#"><i class="fa fa-star"></i></a>
                 </div>
                 <div class="price-boxes">
-                  <span class="new-price">$110.00</span>
+                  <span class="new-price">{{$product->price}} {{$product->valut->sign}}</span>
                 </div>
               </div>
               <div class="product-desc">
@@ -72,24 +72,18 @@
                 <div class="action-buttons-single">
                   <div class="inputx-content">
                     <label for="qty">Quantity:</label>
-                    <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty">
+                    <input type="text" name="qty" id="qty_{{$product->id}}" maxlength="12" value="1" title="Qty" class="input-text qty">
                   </div>
                   <div class="add-to-cart">
-                    <a href="#">Add to cart</a>
+                    <a onclick="window.addToCart({{$product->id}}, $('#qty_'+{{$product->id}}).val());">Add to cart</a>
                   </div>
                   <div class="add-to-links">
                     <div class="add-to-wishlist">
                       <a href="#" data-toggle="tooltip" title="" data-original-title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                    </div>
-                    <div class="compare-button">
-                      <a href="#" data-toggle="tooltip" title="" data-original-title="Compare"><i class="fa fa-refresh"></i></a>
-                    </div>                  
+                    </div>                 
                   </div>
                 </div>
               </div>
-              <div class="singl-share">
-                                <a href="#"><img src="img/single-share.png" alt=""></a>
-                            </div>
             </div>
           </div>
         </div>
@@ -109,7 +103,7 @@
               <p>{!!$product->description!!}</p> 
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="messages">
+          {{-- <div role="tabpanel" class="tab-pane" id="messages">
             <div class="single-post-comments col-md-6 col-md-offset-3">
               <div class="comments-area">
                 <h3 class="comment-reply-title">1 REVIEW FOR TURPIS VELIT ALIQUET</h3>
@@ -118,7 +112,7 @@
                     <li>
                       <div class="comments-details">
                         <div class="comments-list-img">
-                          <img src="img/user-1.jpg" alt="">
+                          <img src="{{asset('plugins/lavoro/img/user-1.jpg')}}" alt="">
                         </div>
                         <div class="comments-content-wrap">
                           <span>
@@ -164,7 +158,7 @@
                 </form>
               </div>            
             </div>
-          </div>
+          </div> --}}
         </div>          
       </div>
     </div>

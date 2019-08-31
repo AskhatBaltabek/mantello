@@ -150,6 +150,9 @@
 		pager: false,
 		speed: 500,
 		pause: 3000,
-		adaptiveHeight: false
+		adaptiveHeight: false,
+		infiniteLoop: false,
+		hideControlOnEnd: true,
+		touchEnabled: false,
 	});
 })(jQuery);    

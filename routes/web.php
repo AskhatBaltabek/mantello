@@ -20,7 +20,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
-	Route::get('/main', 'MainController@index')->name('Admin.Main');
+	Route::get('/', 'MainController@index')->name('Admin.Main');
 
 	Route::get('/getCities', 'MainController@getCities');
 	Route::get('/getCitiesList', 'MainController@getCitiesList');
@@ -68,5 +68,9 @@ Route::group(['prefix' => '/'], function() {
 	Route::get('/shop-grid', 'ShopController@shopGrid')->name('Shop.Grid');
 	Route::get('/product-details', 'ShopController@productDetails')->name('Shop.Good');
 	Route::get('/about', 'ShopController@about')->name('Shop.About');
+	Route::get('/addToCart', 'ShopController@addToCart');
+	Route::get('/getCartDetails', 'ShopController@getCartDetails');
+	Route::get('/updateCart', 'ShopController@updateCart');
 	Route::get('/contact', 'ShopController@contact')->name('Shop.Contact');
+	Route::get('/checkout', 'ShopController@checkout')->name('Shop.Checkout');
 });

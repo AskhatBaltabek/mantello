@@ -1,6 +1,5 @@
 ! function(document, window, $) {
   "use strict";
-  window.app
 
   window.getCategories = function() {
     $.ajax({

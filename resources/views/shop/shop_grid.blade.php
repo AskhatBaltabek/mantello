@@ -208,7 +208,7 @@
 											<span class="sale-text">Sale</span>
 											@endif
 											<div class="product-img">
-												<a href="#">
+												<a href="{{route('Shop.Good')}}?p={{$product->id}}">
 													<img class="primary-image" src="{{asset(preg_replace('/public/', 'storage', $product->getPrimaryImage()))}}" alt="" />
 												</a>
 												<div class="action-zoom">
@@ -223,7 +223,7 @@
 																<a href="#" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
 															</div>
 															<div class="compare-button">
-																<a href="#" title="Add to Cart"><i class="icon-bag"></i></a>
+																<a onclick="window.addToCart({{$product->id}}, 1)" title="Add to Cart"><i class="icon-bag"></i></a>
 															</div>									
 														</div>
 													</div>
